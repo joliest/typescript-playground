@@ -15,13 +15,16 @@ axios.get(url)
     const ID = todo.id;
     const title = todo.title;
     const finished = todo.completed;
+    logTodo(ID, title, finished);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
 
+  const logTodo = (ID: number, title: string, finished: boolean) => {
     console.log(`
       The Todo with ID: ${ID}
       Has a title of ${title}
       Is it finished? ${finished}
     `);
-  })
-  .catch((error) => {
-    console.log(error);
-  })
+  };
