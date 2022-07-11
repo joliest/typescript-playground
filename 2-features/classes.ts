@@ -1,4 +1,3 @@
-// you wont be able to change the modifier of the subclass with the same method name
 class Vehicle {
   protected honk(): void {
     console.log('beep');
@@ -6,7 +5,6 @@ class Vehicle {
 }
 
 class Car extends Vehicle {
-  // restrict different methods that other developer can call that could break something
   private drive(): void {
     console.log('vroom');
   }
@@ -19,4 +17,3 @@ class Car extends Vehicle {
 
 const car = new Car();
 car.startDrivingProcess();
-// car.honk();
