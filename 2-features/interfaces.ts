@@ -1,7 +1,4 @@
-interface Vehicle {
-  name: string;
-  year: Date;
-  broken: boolean;
+interface Reportable {
   summary(): string;
 }
 
@@ -9,14 +6,25 @@ const oldCivic = {
   name: 'civic',
   year: new Date(),
   broken: true,
-  summary() {
+  summary(): string {
     return `Name: ${this.name}`;
   },
 };
 
-// replaced by interface
-const printVehicle = (vehicle: Vehicle): void => {
-  console.log(vehicle.summary);
+const drink = {
+  color: 'brown',
+  carbonated: true,
+  sugar: 40,
+  summary(): string {
+    return `My drink has ${this.sugar} grams of sugar`
+  }
+}
+
+const printSummary = (vehicle: Reportable): void => {
+  console.log(vehicle.summary());
 };
 
-printVehicle(oldCivic);
+// since oldCivic and drink both has summary(), they will be
+// accepted as Reportable
+printSummary(oldCivic);
+printSummary(drink);
