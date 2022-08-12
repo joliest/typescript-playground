@@ -46,4 +46,32 @@ function printAnything<T>(arr: T[]): void {
   }
 }
 
+// recommended to ALWAYS add the type annotations of genrics in classes and functions
 printAnything<string>(['a', 'b', 'c']);
+
+// Generic Constraints
+class Car {
+  print() {
+    console.log('I am a car');
+  }
+}
+class House {
+  print() {
+    console.log('I am a car');
+  }
+}
+
+interface Printable {
+  print(): void;
+}
+
+// constraint that there will be print() available
+function printHousesOrCars<T extends Printable>(arr: T[]): void {
+  for (let i = 0; i < arr.length; i++) {
+    arr[i].print();
+  }
+}
+
+printHousesOrCars<House>([new House(), new Car()]);
+printHousesOrCars([new House(), new Car()]);
+printHousesOrCars<Car>([new Car(), new Car()]);
