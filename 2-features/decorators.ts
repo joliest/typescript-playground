@@ -5,22 +5,24 @@ class Boat {
     return `This boats color is ${this.color}`;
   }
 
-  @logError
+  @logError('Oops the boat was sunk!')
   pilot(): void {
     throw new Error();
   }
 }
 
-function logError(target: any, key: string, dsc: PropertyDescriptor): void {
-  // method is now referenced to pilot()
-  const method = dsc.value;
+function logError(errorMessage: string) {
+  return function (target: any, key: string, dsc: PropertyDescriptor): void {
+    // method is now referenced to pilot()
+    const method = dsc.value;
 
-  dsc.value = function () {
-    try {
-      method();
-    } catch (e) {
-      console.log('Oops, boat was sunk!');
-    }
+    dsc.value = function () {
+      try {
+        method();
+      } catch (e) {
+        console.log(errorMessage);
+      }
+    };
   };
 }
 
